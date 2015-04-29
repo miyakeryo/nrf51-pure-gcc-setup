@@ -19,6 +19,10 @@ ifeq ($(USE_SOFTDEVICE), s120)
     USE_BLE = 1
 endif
 
+ifeq ($(USE_SOFTDEVICE), s130)
+    USE_BLE = 1
+endif
+
 ifeq ($(USE_SOFTDEVICE), s210)
     USE_ANT = 1
 endif
@@ -35,6 +39,7 @@ ifeq ($(SDK_VERSION), 7)
 	SDK_INCLUDE_PATH += $(SDK_PATH)components/
 	SDK_SOURCE_PATH += $(SDK_PATH)components/
 	CMSIS_INCLUDE_PATH += $(SDK_PATH)components/toolchain/gcc/
+	LIBRARY_PATHS += ../
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)libraries/*/)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)drivers_nrf/ble_flash/)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)drivers_nrf/hal/)
@@ -48,6 +53,7 @@ ifeq ($(SDK_VERSION), 7)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)drivers_nrf/uart/)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)drivers_ext/*/)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)serialization/*/)
+	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)ble/*/)
 	LIBRARY_PATHS += $(SDK_PATH)components/toolchain/gcc/
 	LIBRARY_PATHS += $(SDK_INCLUDE_PATH)toolchain/
 	SOURCE_PATHS += ../ 
