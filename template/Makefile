@@ -34,13 +34,23 @@ endif
 
 
 ifeq ($(SDK_VERSION), 7)
+	SDK_7 = 1
+endif
+
+ifeq ($(SDK_VERSION), 8)
+	SDK_7 = 1
+endif
+
+ifdef SDK_7
 #this is for version 7
 
 	SDK_INCLUDE_PATH += $(SDK_PATH)components/
 	SDK_SOURCE_PATH += $(SDK_PATH)components/
 	CMSIS_INCLUDE_PATH += $(SDK_PATH)components/toolchain/gcc/
 	LIBRARY_PATHS += ../
+	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)ble/*/)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)libraries/*/)
+	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)drivers_ext/*/)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)drivers_nrf/ble_flash/)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)drivers_nrf/hal/)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)drivers_nrf/pstorage/)
@@ -51,10 +61,9 @@ ifeq ($(SDK_VERSION), 7)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)drivers_nrf/spi_slave/)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)drivers_nrf/twi_master/)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)drivers_nrf/uart/)
-	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)drivers_ext/*/)
 	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)serialization/*/)
-	LIBRARY_PATHS += $(wildcard $(SDK_INCLUDE_PATH)ble/*/)
-	LIBRARY_PATHS += $(SDK_PATH)components/toolchain/gcc/
+	LIBRARY_PATHS += $(SDK_INCLUDE_PATH)device/
+	LIBRARY_PATHS += $(SDK_INCLUDE_PATH)toolchain/gcc/
 	LIBRARY_PATHS += $(SDK_INCLUDE_PATH)toolchain/
 	SOURCE_PATHS += ../ 
 	SOURCE_PATHS += $(SDK_SOURCE_PATH) 
